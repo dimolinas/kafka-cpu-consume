@@ -1,37 +1,74 @@
-# kafka-cpu-consume
-Kafka Quick Start Guide
+Here's the rich text formatted into markdown suitable for a README file:
 
-This guide provides step-by-step instructions to quickly set up and run Apache Kafka on your local machine for development and testing purposes.
-1. Start Zookeeper
+---
 
-bash
+### Running Zookeeper and Kafka Servers
 
-./zookeeper-server-start.sh ../config/zookeeper.properties
+1. **Start Zookeeper:**
 
-2. Start Kafka Server
+   Run your `zookeeper-server-start.sh` file and pass `zookeeper.properties` as an argument:
 
-bash
+   ```bash
+   ./zookeeper-server-start.sh ../config/zookeeper.properties
+   ```
 
-./kafka-server-start.sh ../config/server.properties
+   Your Zookeeper server has started. Now proceed to start Kafka.
 
-3. Create a Kafka Topic
+2. **Start Kafka:**
 
-bash
+   To start Kafka server, run `kafka-server-start.sh` with `server.properties` as the argument:
 
-./kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 4
+   ```bash
+   ./kafka-server-start.sh ../config/server.properties
+   ```
 
-4. Produce Messages to the Topic
+   Kafka server is now up and running.
 
-bash
+3. **Create a Kafka Topic:**
 
+   Now that both Zookeeper and Kafka servers are running, create a new topic using:
+
+   ```bash
+   ./kafka-topics.sh --create --topic test-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 4
+   ```
+
+   - `--create`: Indicates creation of a new topic.
+   - `--topic test-topic`: Specifies the topic name.
+   - `--bootstrap-server localhost:9092`: Specifies Kafka server's address.
+   - `--replication-factor 1`: Number of replication factors.
+   - `--partitions 4`: Number of partitions for the topic.
+
+### Creating Producers and Consumers
+
+**Create a Producer:**
+
+To produce/send data to `test-topic`, use:
+
+```bash
 ./kafka-console-producer.sh --broker-list localhost:9092 --topic test-topic
+```
 
-5. Consume Messages from the Topic
+- `--broker-list localhost:9092`: Specifies Kafka broker's address.
+- `--topic test-topic`: Specifies the topic name.
 
-bash
+**Create a Consumer:**
 
+Open a new terminal and change directory to Kafka's bin:
+
+```bash
+cd usercode/kafka/bin
+```
+
+Then create a consumer that reads messages from `test-topic`:
+
+```bash
 ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test-topic --from-beginning
+```
 
-Conclusion
+- `--bootstrap-server localhost:9092`: Specifies Kafka server's address.
+- `--topic test-topic`: Specifies the topic name.
+- `--from-beginning`: Starts consuming from the beginning of the topic.
 
-Follow these steps to quickly set up and start using Kafka on your local machine. Adjust configurations and explore further based on your specific use cases and requirements.
+---
+
+This README provides instructions for setting up Zookeeper and Kafka servers, creating Kafka topics, and managing producers and consumers via command line tools. Adjust paths and configurations based on your environment setup.
