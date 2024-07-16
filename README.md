@@ -1,5 +1,3 @@
-Here's the rich text formatted into markdown suitable for a README file:
-
 ---
 
 ### Running Zookeeper and Kafka Servers
